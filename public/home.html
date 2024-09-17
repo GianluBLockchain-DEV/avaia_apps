@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Email Sender</title>
+  <link rel="stylesheet" href="styles/home-styles.css">
+
+</head>
+<div class="body-sender">
+  <div class="container-sender">
+    <h1 class="sender-title">code Sender Home</h1>
+    <div id="emailForm">
+      <label for="emailContent">Enter code Content:</label>
+      <textarea id="emailContent" name="emailContent" rows="10" cols="50" placeholder="provide your code here...and check the wizard!"></textarea>
+      <button class="sender-btn" onclick="x()">Send Email</button>
+    </div>
+    <div id="statusMessage" class="status-message-sender"></div>
+  </div>
+
+</div>
+</html>
+
+<script>
+
+function x () {
+   
+      const emailContent = document.getElementById('emailContent').value;
+      
+      // Send the email content to the backend for processing
+      fetch('/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ emailContent: emailContent })
+      })
+      .then(response => {
+        if (response.ok) {
+          document.getElementById('statusMessage').textContent = 'Email sent successfully!';
+        } else {
+          throw new Error('Failed to send email.');
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        document.getElementById('statusMessage').textContent = 'An error occurred while sending the email.';
+      });
+    }
+  </script>

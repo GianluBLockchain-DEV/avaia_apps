@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Email Sender</title>
+</head>
+<body>
+  <h1>Email Sender</h1>
+  <form id="emailForm">
+    <label for="emailContent">Enter Email Content:</label><br>
+    <textarea id="emailContent" name="emailContent" rows="10" cols="50"></textarea><br><br>
+    <button type="submit">Send Email</button>
+  </form>
+
+  <script>
+    document.getElementById('emailForm').addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent default form submission
+
+      const emailContent = document.getElementById('emailContent').value;
+      
+      // Send the email content to the backend for processing
+      fetch('/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ emailContent: emailContent })
+      })
+      .then(response => {
+        if (response.ok) {
+          alert('Email sent successfully!');
+        } else {
+          throw new Error('Failed to send email.');
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        alert('An error occurred while sending the email.');
+      });
+    });
+  </script>
+</body>
+</html>
