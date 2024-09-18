@@ -46,9 +46,9 @@
     </div>
 
     <div class="container-sender">
-      <h1 class="sender-title">AVAIA Code Sender</h1>
+      <h1 class="sender-title">AVAIA Email Sender</h1>
       <div id="emailForm">
-        <label for="senderEmail">Sender Email:</label>
+        <label for="senderEmail">Email mittente:</label>
         <input
           type="email"
           id="senderEmail"
@@ -56,7 +56,7 @@
           placeholder="Enter your email"
         /><br />
 
-        <label for="senderPassword">Sender Password:</label>
+        <label for="senderPassword">password per app terze parti:</label>
         <input
           type="password"
           id="senderPassword"
@@ -64,7 +64,7 @@
           placeholder="Enter your password"
         /><br />
 
-        <label for="subject">Subject:</label>
+        <label for="subject">Oggetto:</label>
         <input
           type="text"
           id="subject"
@@ -72,7 +72,7 @@
           placeholder="Enter email subject"
         /><br />
 
-        <label for="recipients">Recipients (comma-separated):</label>
+        <label for="recipients">email destinatari separate da ';':</label>
         <input
           type="text"
           id="recipients"
@@ -80,7 +80,9 @@
           placeholder="Enter recipient emails"
         /><br />
 
-        <label for="emailContent">Enter Code Content:</label>
+        <label for="emailContent"
+          >Scrivi il Messaggio che vorresti inviare:</label
+        >
         <textarea
           id="emailContent"
           name="emailContent"
@@ -89,7 +91,9 @@
           placeholder="Provide your code here...and drop the rocket!"
         ></textarea>
 
-        <button class="sender-btn" onclick="sendMail(event)">Send Email</button>
+        <button class="sender-btn" onclick="sendMail(event)">
+          Invio Email
+        </button>
       </div>
 
       <div id="statusMessage" class="status-message-sender"></div>
