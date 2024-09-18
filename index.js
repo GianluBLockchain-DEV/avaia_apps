@@ -23,27 +23,24 @@ app.get("/", (req, res) => {
 });
 
 app.post("/send-email", (req, res) => {
-  const { emailContent } = req.body;
-
-  // Read email addresses from emails.json
-  const emailData = JSON.parse(fs.readFileSync("emails.json"));
-  const recipients = emailData.emails;
+  const { emailContent, senderEmail, senderPassword, subject, recipients } =
+    req.body;
 
   // Create Nodemailer transporter
   const transporter = nodemailer.createTransport({
-    service: "Gmail", // Specify your email service provider
+    service: "Gmail",
     auth: {
-      user: "gunity72@gmail.com", // Your email address
-      pass: "poqj spja hlkw oacf", // Your email password
+      user: senderEmail,
+      pass: senderPassword,
     },
   });
 
   // Loop through recipients and send email to each
   recipients.forEach((recipient) => {
     const mailOptions = {
-      from: "gunity72@gmail.com",
+      from: senderEmail,
       to: recipient,
-      subject: "test#1",
+      subject: subject,
       html: emailContent,
     };
 
@@ -53,7 +50,6 @@ app.post("/send-email", (req, res) => {
         // Handle error if needed
       } else {
         console.log("Email sent to:", recipient);
-        // Handle success if needed
       }
     });
   });

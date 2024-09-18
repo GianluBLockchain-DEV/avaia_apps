@@ -1,73 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="styles/index.css">
-  <title>AVAIA.ai/send</title>
-</head>
-<body>
-  <header>
-    <nav>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles/index.css" />
+    <title>AVAIA.ai/send</title>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <div class="container">
+          <ul class="nav-links">
+            <li><a href="rubrica">rubrica</a></li>
+            <li><a href="#">calendario</a></li>
+            <li><a href="messaggi_inviati">archivio messaggi</a></li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+    <section class="hero">
       <div class="container">
-        <ul class="nav-links">
-          <li><a href="rubrica">rubrica</a></li>
-          <li><a href="#">calendario</a></li>
-          <li><a href="messaggi_inviati">archivio messaggi</a></li>
-        </ul>
+        <h1>AVAIA</h1>
+        <h2>A minimalistic web marketing app engine</h2>
       </div>
-    </nav>
-  </header>
-
-  <section class="hero">
-    <div class="container">
-      <h1>AVAIA</h1>
-      <h2>A minimalistic web marketing app engine</h2>
-    </div>
-  </section>
-
+    </section>
 
     <div class="container-previewing-html">
-      <h1 class="sender-title">AVAIA code wizard</h1>
+      <h1 class="sender-title">AVAIA Code Wizard</h1>
       <div class="divpreview">
-
-        <textarea id="inputAreapreview" oninput="updateDisplay(this.value)" placeholder="Paste your HTML code here"></textarea>
-
+        <textarea
+          id="inputAreapreview"
+          oninput="updateDisplay(this.value)"
+          placeholder="Paste your HTML code here"
+        ></textarea>
         <div id="displayAreapreview"></div>
 
         <script>
-            function updateDisplay(value) {
-                const displayArea = document.getElementById('displayAreapreview');
-                displayArea.innerHTML = value;
-            }
+          function updateDisplay(value) {
+            const displayArea = document.getElementById("displayAreapreview");
+            displayArea.innerHTML = value;
+          }
         </script>
-    </div>
       </div>
     </div>
 
     <div class="container-sender">
-      <h1 class="sender-title">AVAIA code Sender</h1>
+      <h1 class="sender-title">AVAIA Code Sender</h1>
       <div id="emailForm">
-        <label for="emailContent">Enter code Content:</label>
-        <textarea id="emailContent" name="emailContent" rows="10" cols="50" placeholder="provide your code here...and drop the rocket!"></textarea>
-        <button class="sender-btn" onclick="sendMail()" >Send Email</button>
+        <label for="senderEmail">Sender Email:</label>
+        <input
+          type="email"
+          id="senderEmail"
+          required
+          placeholder="Enter your email"
+        /><br />
+
+        <label for="senderPassword">Sender Password:</label>
+        <input
+          type="password"
+          id="senderPassword"
+          required
+          placeholder="Enter your password"
+        /><br />
+
+        <label for="subject">Subject:</label>
+        <input
+          type="text"
+          id="subject"
+          required
+          placeholder="Enter email subject"
+        /><br />
+
+        <label for="recipients">Recipients (comma-separated):</label>
+        <input
+          type="text"
+          id="recipients"
+          required
+          placeholder="Enter recipient emails"
+        /><br />
+
+        <label for="emailContent">Enter Code Content:</label>
+        <textarea
+          id="emailContent"
+          name="emailContent"
+          rows="10"
+          cols="50"
+          placeholder="Provide your code here...and drop the rocket!"
+        ></textarea>
+
+        <button class="sender-btn" onclick="sendMail(event)">Send Email</button>
       </div>
+
       <div id="statusMessage" class="status-message-sender"></div>
     </div>
 
-  <section class="register">
-    <div class="container">
-      <h2>email - wizard</h2>
+    <section class="register">
+      <div class="container">
+        <h2>Email - Wizard</h2>
+      </div>
+    </section>
 
-    </div>
-  </section>
-
-  <footer>
-    <div class="container">
-      <p>&copy; 2022 AVAIA.ai All rights reserved.</p>
-    </div>
-  </footer>
-
-  <script src="/scripts/sender-script.js"></script>
-</body>
+    <footer>
+      <div class="container">
+        <p>&copy; 2022 AVAIA.ai All rights reserved.</p>
+      </div>
+    </footer>
+    <script src="/scripts/sender-script.js"></script>
+  </body>
 </html>
