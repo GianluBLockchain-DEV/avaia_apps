@@ -28,7 +28,9 @@ app.post("/send-email", (req, res) => {
 
   // Create Nodemailer transporter
   const transporter = nodemailer.createTransport({
-    service: "Gmail",
+    host: "smtp.office365.com", // Host SMTP di Outlook
+    port: 587, // Porta per STARTTLS
+    secure: false, // Impostato su false per utilizzare STARTTLS
     auth: {
       user: senderEmail,
       pass: senderPassword,
