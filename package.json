@@ -1,16 +1,17 @@
 {
-  "name": "web2",
+  "name": "avaia-email-sender",
   "version": "1.0.0",
-  "description": "",
+  "description": "A minimalistic email sending app using Nodemailer with dynamic SMTP choice.",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
-    "express": "^4.18.2",
-    "nodemailer": "^6.9.9"
-  }
+    "express": "^4.17.1",
+    "nodemailer": "^6.6.3",
+    "body-parser": "^1.19.0",
+    "multer": "^1.4.3"
+  },
+  "author": "Your Name",
+  "license": "ISC"
 }
