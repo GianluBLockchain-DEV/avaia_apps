@@ -14,31 +14,32 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
 
 // Route for the root URL
-app.get("/home", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "home.html"));
-});
-
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "web.html"));
 });
 
-app.post("/send-email", (req, res) => {
+app.post("/send-email", async (req, res) => {
   const { emailContent, senderEmail, senderPassword, subject, recipients } =
     req.body;
 
   // Create Nodemailer transporter
   const transporter = nodemailer.createTransport({
-    host: "smtp.office365.com", // Host SMTP di Outlook
-    port: 587, // Porta per STARTTLS
-    secure: false, // Impostato su false per utilizzare STARTTLS
+    host: "smtp.gmail.com",
+    port: 465,
+    secure: true,
     auth: {
       user: senderEmail,
       pass: senderPassword,
     },
   });
 
-  // Loop through recipients and send email to each
-  recipients.forEach((recipient) => {
+  // Split recipients into an array and trim spaces
+  const recipientList = recipients.split(";").map((email) => email.trim());
+
+  let successfulSends = 0;
+  let failedSends = 0;
+
+  for (const recipient of recipientList) {
     const mailOptions = {
       from: senderEmail,
       to: recipient,
@@ -46,17 +47,21 @@ app.post("/send-email", (req, res) => {
       html: emailContent,
     };
 
-    transporter.sendMail(mailOptions, (error, info) => {
-      if (error) {
-        console.error("Error:", error);
-        // Handle error if needed
-      } else {
-        console.log("Email sent to:", recipient);
-      }
-    });
-  });
+    try {
+      await transporter.sendMail(mailOptions);
+      console.log(`Email sent to: ${recipient}`);
+      successfulSends++;
+    } catch (error) {
+      console.error(`Error sending to ${recipient}:`, error);
+      failedSends++;
+    }
+  }
 
-  res.status(200).send("Emails sent successfully!");
+  res
+    .status(200)
+    .send(
+      `Emails sent successfully! Success: ${successfulSends}, Failed: ${failedSends}`
+    );
 });
 
 app.listen(PORT, () => {
