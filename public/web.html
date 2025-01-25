@@ -3,115 +3,153 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css"
+    />
     <link rel="stylesheet" href="styles/index.css" />
-    <title>AVAIA.ai/send</title>
+    <title>AVAIA.ai Bulk Sender</title>
   </head>
   <body>
     <header>
-      <nav>
-        <div class="container">
-          <ul class="nav-links">
-            <li><a href="email-list">Liste email</a></li>
-            <li><a href="#">calendario</a></li>
-            <li><a href="messaggi_inviati">archivio messaggi</a></li>
-          </ul>
-        </div>
+      <nav class="navbar">
+        <ul class="nav-links">
+          <li class="fill"><a href="#">Liste Email</a></li>
+          <li class="fill"><a href="#">Calendario</a></li>
+          <li class="fill"><a href="#">Archivio</a></li>
+        </ul>
       </nav>
     </header>
+    <main>
+      <section class="hero">
+        <div class="container center">
+          <h1 class="title">AVAIA</h1>
+          <h2 class="subtitle">A Minimalistic Web Marketing App Engine</h2>
+        </div>
+      </section>
 
-    <section class="hero">
-      <div class="container">
-        <h1>AVAIA</h1>
-        <h2>A minimalistic web marketing app engine</h2>
-      </div>
-    </section>
+      <!-- Wizard HTML Section -->
+      <section class="wizard">
+        <div class="container center">
+          <h1 class="section-title">AVAIA Code Wizard</h1>
+          <textarea
+            id="inputAreapreview"
+            class="textarea"
+            oninput="updateDisplay(this.value)"
+            placeholder="Paste your HTML code here"
+          ></textarea>
+          <div id="displayAreapreview" class="preview-box"></div>
+        </div>
+      </section>
 
-    <!-- Wizard HTML Section -->
-    <div class="container-previewing-html">
-      <h1 class="sender-title">AVAIA Code Wizard</h1>
-      <div class="divpreview">
-        <textarea
-          id="inputAreapreview"
-          oninput="updateDisplay(this.value)"
-          placeholder="Paste your HTML code here"
-        ></textarea>
-        <div id="displayAreapreview"></div>
+      <!-- Email Sender Section -->
+      <section class="email-sender">
+        <div class="container center">
+          <h1 class="section-title">AVAIA Email Sender</h1>
+          <form id="emailForm" enctype="multipart/form-data">
+            <label for="senderEmail">Email Mittente:</label>
+            <input
+              type="email"
+              id="senderEmail"
+              name="senderEmail"
+              class="input"
+              required
+              placeholder="Enter your email"
+            />
 
-        <script>
-          function updateDisplay(value) {
-            const displayArea = document.getElementById("displayAreapreview");
-            displayArea.innerHTML = value;
-          }
-        </script>
-      </div>
-    </div>
+            <label for="senderPassword">Password per App Terze Parti:</label>
+            <input
+              type="password"
+              id="senderPassword"
+              name="senderPassword"
+              class="input"
+              required
+              placeholder="Enter your password"
+            />
 
-    <!-- Email Sender Section -->
-    <div class="container-sender">
-      <h1 class="sender-title">AVAIA Email Sender</h1>
-      <div id="emailForm">
-        <label for="senderEmail">Email mittente:</label>
-        <input
-          type="email"
-          id="senderEmail"
-          required
-          placeholder="Enter your email"
-        /><br />
+            <label for="subject">Oggetto:</label>
+            <input
+              type="text"
+              id="subject"
+              name="subject"
+              class="input"
+              required
+              placeholder="Enter email subject"
+            />
 
-        <label for="senderPassword">Password per app terze parti:</label>
-        <input
-          type="password"
-          id="senderPassword"
-          required
-          placeholder="Enter your password"
-        /><br />
+            <label for="recipients">Email Destinatari Separate da ';':</label>
+            <input
+              type="text"
+              id="recipients"
+              name="recipients"
+              class="input"
+              required
+              placeholder="Enter recipient emails"
+            />
 
-        <label for="subject">Oggetto:</label>
-        <input
-          type="text"
-          id="subject"
-          required
-          placeholder="Enter email subject"
-        /><br />
+            <label for="emailContent"
+              >Scrivi il Messaggio che Vorresti Inviare:</label
+            >
+            <textarea
+              id="emailContent"
+              name="emailContent"
+              class="textarea"
+              rows="10"
+              placeholder="Provide your code here... and drop the rocket!"
+            ></textarea>
 
-        <label for="recipients">Email destinatari separate da ';':</label>
-        <input
-          type="text"
-          id="recipients"
-          required
-          placeholder="Enter recipient emails"
-        /><br />
+            <label for="attachments">Carica Allegati:</label>
+            <input
+              type="file"
+              id="attachments"
+              name="attachments"
+              class="file-input"
+              multiple
+            />
 
-        <label for="emailContent"
-          >Scrivi il Messaggio che vorresti inviare:</label
-        >
-        <textarea
-          id="emailContent"
-          name="emailContent"
-          rows="10"
-          cols="50"
-          placeholder="Provide your code here...and drop the rocket!"
-        ></textarea>
-
-        <button class="sender-btn" onclick="sendMail(event)">
-          Invio Email
-        </button>
-      </div>
-
-      <div id="statusMessage" class="status-message-sender"></div>
-    </div>
-
-    <section class="register">
-      <div class="container">
-        <h2>Email - Wizard</h2>
-      </div>
-    </section>
-
+            <button class="btn" onclick="sendMail(event)">Invio Email</button>
+          </form>
+          <div id="statusMessage" class="status-message"></div>
+          <div id="loader" class="loader" style="display: none">Sending...</div>
+        </div>
+      </section>
+    </main>
     <footer>
-      <div class="container">
-        <p>&copy; 2022 AVAIA.ai All rights reserved.</p>
+      <div class="center">
+        <p>&copy; 2025 AVAIA.ai All rights reserved.</p>
       </div>
     </footer>
-    <script src="/scripts/sender-script.js"></script>
+
+    <script>
+      function updateDisplay(value) {
+        const displayArea = document.getElementById("displayAreapreview");
+        displayArea.innerHTML = value;
+      }
+
+      async function sendMail(event) {
+        event.preventDefault(); // Prevent form from refreshing the page
+        const form = document.getElementById("emailForm");
+        const formData = new FormData(form);
+
+        // Show loader
+        document.getElementById("loader").style.display = "block";
+
+        try {
+          const response = await fetch("/send-email", {
+            method: "POST",
+            body: formData,
+          });
+          const message = await response.text();
+          document.getElementById("statusMessage").innerText = message;
+        } catch (error) {
+          console.error("Error:", error);
+          document.getElementById("statusMessage").innerText =
+            "Failed to send email.";
+        } finally {
+          // Hide loader
+          document.getElementById("loader").style.display = "none";
+        }
+      }
+    </script>
   </body>
 </html>
