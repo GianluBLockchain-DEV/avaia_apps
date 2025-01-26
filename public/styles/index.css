@@ -150,3 +150,32 @@ li {
   margin: 0.5em;
   padding: 1em 2em;
 }
+
+/* CodeMirror Editor */
+.CodeMirror {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  height: 500px; /* Adjust height as needed */
+  width: 100%;
+}
+
+/* Font Size Controls */
+.font-controls {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.font-controls button {
+  background-color: #0078d7;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.font-controls button:hover {
+  background-color: #005bb5;
+}

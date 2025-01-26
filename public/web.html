@@ -7,6 +7,15 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css"
     />
+    <!-- CodeMirror CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.0/codemirror.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.0/theme/material.min.css"
+    />
     <link rel="stylesheet" href="styles/index.css" />
     <title>AVAIA.ai Bulk Sender</title>
   </head>
@@ -32,12 +41,12 @@
       <section class="wizard">
         <div class="container center">
           <h1 class="section-title">AVAIA Code Wizard</h1>
-          <textarea
-            id="inputAreapreview"
+          <!-- Replace textarea with CodeMirror editor -->
+          <div
+            id="codeEditor"
             class="textarea"
-            oninput="updateDisplay(this.value)"
             placeholder="Paste your HTML code here"
-          ></textarea>
+          ></div>
           <div id="displayAreapreview" class="preview-box"></div>
         </div>
       </section>
@@ -120,16 +129,70 @@
       </div>
     </footer>
 
+    <!-- CodeMirror JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.0/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.0/mode/htmlmixed/htmlmixed.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.0/mode/css/css.min.js"></script>
     <script>
-      function updateDisplay(value) {
-        const displayArea = document.getElementById("displayAreapreview");
-        displayArea.innerHTML = value;
+      // Initialize CodeMirror Editor
+      const editor = CodeMirror(document.getElementById("codeEditor"), {
+        mode: "htmlmixed", // Supports both HTML and CSS
+        theme: "material", // Choose a theme (e.g., "material", "default")
+        lineNumbers: true, // Show line numbers
+        autoCloseTags: true, // Automatically close HTML tags
+        matchBrackets: true, // Highlight matching brackets
+        extraKeys: { "Ctrl-Space": "autocomplete" }, // Enable autocomplete
+        value: `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Newsletter</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+  </style>
+</head>
+<body>
+  <h1>Hello, World!</h1>
+</body>
+</html>`,
+      });
+
+      // Update preview on change
+      editor.on("change", (cm) => {
+        document.getElementById("displayAreapreview").innerHTML = cm.getValue();
+      });
+
+      // Function to adjust font size
+      function adjustFontSize(step) {
+        const editorElement = document.querySelector(".CodeMirror");
+        const currentSize = parseInt(
+          window.getComputedStyle(editorElement).fontSize
+        );
+        editorElement.style.fontSize = `${currentSize + step}px`;
       }
 
+      // Add font size controls
+      const fontSizeControls = document.createElement("div");
+      fontSizeControls.innerHTML = `
+        <button onclick="adjustFontSize(-1)">A-</button>
+        <button onclick="adjustFontSize(1)">A+</button>
+      `;
+      fontSizeControls.style.marginTop = "10px";
+      document
+        .querySelector(".wizard .container")
+        .appendChild(fontSizeControls);
+
+      // Email Sending Functionality
       async function sendMail(event) {
         event.preventDefault(); // Prevent form from refreshing the page
         const form = document.getElementById("emailForm");
         const formData = new FormData(form);
+
+        // Add CodeMirror content to the form data
+        formData.set("emailContent", editor.getValue());
 
         // Show loader
         document.getElementById("loader").style.display = "block";
