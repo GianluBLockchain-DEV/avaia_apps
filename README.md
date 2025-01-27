@@ -1,4 +1,5 @@
-HI Guys im very happy to share a way for fast send cold mail template! tell me if you like. i have my Lkdn profile :https://www.linkedin.com/in/g-uva-
+HI Guys im very happy to share a way for fast send cold mail template! tell me if you like. 
+here you have my Lkdn profile https://www.linkedin.com/in/g-uva-
 
 ## **README.md**
 
