@@ -11,14 +11,14 @@ body {
   font-family: "Brawler", serif;
   font-weight: 400;
   font-style: normal;
-  background-color: #045d79;
+  background-color: #047958;
   color: #333;
   line-height: 1.6;
 }
 
 /* Navbar */
 .navbar {
-  background-color: #0078d7;
+  background-color: #047958;
   padding: 5px;
 }
 
@@ -45,7 +45,7 @@ body {
 .title {
   font-size: 2.5rem;
   margin-bottom: 10px;
-  color: #045d79;
+  color: #000000;
 }
 
 .subtitle {
@@ -88,7 +88,8 @@ body {
 
 .file-input {
   border: none;
-  background-color: #f5f5f5;
+  background-color: #000000;
+  color: #047958;
 }
 
 .btn {
@@ -119,7 +120,7 @@ body {
 footer {
   text-align: center;
   padding: 10px 0;
-  background-color: #0078d7;
+  background-color: #ffffff;
   color: #000000;
 }
 
@@ -178,4 +179,20 @@ li {
 
 .font-controls button:hover {
   background-color: #005bb5;
+}
+
+#text-rainbow {
+  background: linear-gradient(
+    to right,
+    violet,
+    indigo,
+    blue,
+    green,
+    gold,
+    orange,
+    red
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
 }
