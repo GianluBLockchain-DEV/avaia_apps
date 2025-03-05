@@ -175,5 +175,4 @@ Enjoy using AVAIA.ai Bulk Sender! 🚀
    - Follow the steps in the **Installation** and **Running the Application** sections of the README.
 
 ---
-
-This README provides clear, concise instructions for users to get started with your application. Let me know if you need further adjustments! 😊
+internet will keep you free 4 ever😊
